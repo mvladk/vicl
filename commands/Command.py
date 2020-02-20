@@ -3,7 +3,7 @@ class Command:
         self.params = i_params
 
     def run(self):
-        return self.result
+        return 'Should have implemented this'
 
     def ready_to_json(self):
         params = {"com": self.__class__.__name__, "params": self.params}

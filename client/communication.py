@@ -49,7 +49,7 @@ def request_server(action, params):
     # print(url)
     # print(r)
     # extracting data in json format
-    print(r.status_code)
+    # print(r.status_code)
     return [] if 200 != r.status_code else r.json()
 
 
@@ -71,7 +71,6 @@ def request_post(action, files):
 
     # extracting data in json format
     # todo: should take care of bad response, retry or exception
-    print(r.status_code)
+    # print(r.status_code)
     print(r.text)
     return [] if 200 != r.status_code is None else r.json()
-

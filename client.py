@@ -2,7 +2,6 @@ import time
 from client.Timer import Timer
 import client.communication as c
 
-# from command.CommandFactory import CommandFactory
 from controllers.CommandFactory import CommandFactory
 
 if __name__ == '__main__':

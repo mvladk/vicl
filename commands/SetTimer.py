@@ -6,4 +6,4 @@ class SetTimer(Command):
     def run(self):
         if "timer" in self.params:
             Timer.set_seconds(int(self.params["timer"]))
-        return Timer.get_seconds()
+        return f"SetTimer to: {Timer.get_seconds()}"
