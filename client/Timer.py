@@ -1,3 +1,8 @@
+"""
+Timer Singleton to keep time in seconds used by client
+"""
+
+
 class Timer:
     __instance = None
 
