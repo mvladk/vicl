@@ -11,8 +11,8 @@ class CommandController:
     def get_collection(self):
         command_factory = CommandFactory()
         collection = []
-        collection.append(command_factory.create_command("SetTimer", {"timer": random.randint(1, 4)}).ready_to_json())
-        collection.append(command_factory.create_command("DownloadFile", {"path": "README.md"}).ready_to_json())
+        collection.append(command_factory.create_command("SetTimer", {"timer": random.randint(3, 8)}).ready_to_json())
+        # collection.append(command_factory.create_command("DownloadFile", {"path": "README.md"}).ready_to_json())
         collection.append(command_factory.create_command("DirList", {"path": "/sbin"}).ready_to_json())
         # collection.append(command_factory.create_command("DirList", {"path": "/Applications"}).ready_to_json())
         return collection

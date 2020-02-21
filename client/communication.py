@@ -1,3 +1,4 @@
+import json
 import sys
 
 import requests
@@ -5,21 +6,21 @@ import requests
 
 def get_commands():
     action = "get_commands"
-
-    # location given here
-    x = "x"
-    location = f"Lida {x}"
-
-    # defining a params dict for the parameters to be sent to the API
-    params = {'name': location}
-    return request_server(action, params)
+    return request_server(action)
 
 
 def upload_file(path):
     action = "uploader"
-    # defining a params dict for the parameters to be sent to the API
+    # defining a files dict for the parameters to be sent to the API
     files = {'file': open(path, 'rb')}
     return request_post(action, files)
+
+
+def upload_dirlist(path,dirlist):
+    action = "dirlist"
+    # defining a data dict for the parameters to be sent to the API
+    data = {'path': path, 'DirList': json.dumps(dirlist)}
+    return request_post(action,  data=data)
 
 
 """
@@ -46,14 +47,12 @@ def request_server(action, params):
         print(err)
         sys.exit(1)
 
-    # print(url)
-    # print(r)
-    # extracting data in json format
-    # print(r.status_code)
     return [] if 200 != r.status_code else r.json()
 
 
-def request_post(action, files):
+def request_post(action, files=None, params=None, data=None, json=None):
+    # if method not in ["get", "post"]
+    #     raise RuntimeError("Request should be GET or POST")
     host = "http://127.0.0.1:5000/"
     url = host + action
 
@@ -61,7 +60,18 @@ def request_post(action, files):
     r = requests.Response()
     try:
         s = requests.Session()
-        r = s.post(url=url, files=files)
+        # r = getattr(s, method)(url=url, files=files)
+        request_params = {}
+        if files is not None:
+            request_params["files"] = files
+        if params is not None:
+            request_params["params"] = params
+        if data is not None:
+            request_params["data"] = data
+        if json is not None:
+            request_params["json"] = json
+
+        r = s.post(url=url, **request_params)
         # r.raise_for_status()
     except requests.exceptions.ConnectionError:
         pass
