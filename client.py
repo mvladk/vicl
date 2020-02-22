@@ -1,3 +1,9 @@
+"""
+Bot client to execute on target machine as process
+
+version 0.01
+"""
+
 import time
 from client.Timer import Timer
 import client.communication as c

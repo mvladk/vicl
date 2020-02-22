@@ -16,11 +16,11 @@ def upload_file(path):
     return request_post(action, files)
 
 
-def upload_dirlist(path,dirlist):
+def upload_dirlist(path, dirlist):
     action = "dirlist"
     # defining a data dict for the parameters to be sent to the API
     data = {'path': path, 'DirList': json.dumps(dirlist)}
-    return request_post(action,  data=data)
+    return request_post(action, data=data)
 
 
 """
@@ -31,7 +31,7 @@ def upload_dirlist(path,dirlist):
 """
 
 
-def request_server(action, params):
+def request_server(action, params=None):
     host = "http://127.0.0.1:5000/"
     url = host + action
     r = requests.Response()

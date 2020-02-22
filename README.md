@@ -1,4 +1,17 @@
-# vicl
-client and server command and controll example
+# vicl 
+client and server command and control example
 
-Python 3.8.1
+
+
+
+client.py - a Bot to execute on target machine as process
+compile to executable or run directly as process:
+
+nohup python -u client.py > /dev/null &
+
+
+
+
+server.py - Command and Control Server
+
+

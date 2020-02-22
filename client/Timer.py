@@ -19,7 +19,7 @@ class Timer:
             raise Exception("This class is a singleton!")
         else:
             # default value
-            self.seconds = 1
+            self.seconds = 3
             Timer.__instance = self
 
     @staticmethod

