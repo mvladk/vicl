@@ -1,3 +1,4 @@
+import json
 import os
 
 from commands.Command import Command
@@ -16,6 +17,9 @@ class DirList(Command):
         return ['path']
 
     def run(self):
-        listdir = os.listdir(self.path)
-        c.upload_dirlist(self.path, listdir)
-        return f'DirList {self.path}: {listdir}'
+        dirlist = os.listdir(self.path)
+
+        # defining a data dict for the parameters to be sent to the API
+        data = {'path': self.path, 'DirList': json.dumps(dirlist)}
+        return c.request_server('dirlist', 'post', data=data)
+

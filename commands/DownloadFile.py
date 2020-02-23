@@ -14,5 +14,6 @@ class DownloadFile(Command):
         return ['path']
 
     def run(self):
-        c.upload_file(self.path)
-        return f'DownloadFile complete: {self.path}'
+        # defining a files dict for the parameters to be sent to the API
+        files = {'file': open(self.path, 'rb')}
+        return c.request_server('uploader', 'post', files=files)

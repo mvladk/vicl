@@ -15,7 +15,7 @@ if __name__ == '__main__':
     command_factory = CommandFactory()
     while True:
         time.sleep(Timer.get_seconds())
-        command_list = c.get_commands()
+        command_list = c.request_server('get_commands', 'get')
 
         for com in command_list:
             print(command_factory.create_command(com["com"], com["params"]).run())
