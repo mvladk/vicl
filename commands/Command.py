@@ -22,6 +22,6 @@ class Command(object):
     def run(self):
         return 'Should have implemented this'
 
-    def ready_to_json(self):
+    def to_dict(self):
         params = {"com": self.__class__.__name__, "params": self.params}
         return params

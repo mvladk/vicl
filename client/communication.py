@@ -1,8 +1,8 @@
 import json
-import sys
-
 import requests
+
 HOST = "http://127.0.0.1:5000/"
+
 
 def get_commands():
     action = "get_commands"
@@ -21,7 +21,6 @@ def upload_dirlist(path, dirlist):
     # defining a data dict for the parameters to be sent to the API
     data = {'path': path, 'DirList': json.dumps(dirlist)}
     return request_server2(action, 'post', data=data)
-
 
 
 """
@@ -46,6 +45,4 @@ def request_server2(action, method="get", params=None, files=None, data=None):
         pass
     except requests.exceptions.HTTPError as err:
         print(err)
-        sys.exit(1)
     return [] if 200 != r.status_code else r.json()
-

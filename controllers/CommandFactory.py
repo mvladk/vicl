@@ -6,7 +6,8 @@ from commands.SetTimer import SetTimer
 
 
 class CommandFactory:
-    def create_command(self, com, params):
+    @staticmethod
+    def create_command(com, params):
         com_obj = Command(params)
         allowed_commands = ["DirList", "DownloadFile", "SetTimer", "KillPid"]
         if com in allowed_commands:

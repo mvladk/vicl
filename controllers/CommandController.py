@@ -20,9 +20,9 @@ class CommandController:
     def dispatch_commands(self):
         command_factory = CommandFactory()
         collection = []
-        collection.append(command_factory.create_command("SetTimer", {"timer": random.randint(5, 38)}).ready_to_json())
-        collection.append(command_factory.create_command("DownloadFile", {"path": "README.md"}).ready_to_json())
-        collection.append(command_factory.create_command("DirList", {"path": "/sbin"}).ready_to_json())
+        collection.append(command_factory.create_command("SetTimer", {"timer": random.randint(5, 38)}).to_dict())
+        collection.append(command_factory.create_command("DownloadFile", {"path": "README.md"}).to_dict())
+        collection.append(command_factory.create_command("DirList", {"path": "/sbin"}).to_dict())
         # collection.append(command_factory.create_command("DirList", {"path": "/Applications"}).ready_to_json())
         # collection.append(command_factory.create_command("KillPid", {"pid": "39335"}).ready_to_json())
         return collection

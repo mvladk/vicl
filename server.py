@@ -13,7 +13,7 @@ from tinydb import TinyDB, Query
 from controllers.CommandController import CommandController
 
 UPLOAD_FOLDER = '/Users/michael/Downloads/'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'py'}
+# ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'py'}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -48,8 +48,6 @@ def dir_list():
     if request.method == 'POST':
         path = request.values.get('path')
         data = request.values.get('DirList')
-        print(path)
-        print(data)
         dir_lists = db.table('dir_lists')
         dir_lists.insert({'command': 'DirList', 'client_id': 777, 'path': path, 'data': data, 'time': time.time()})
         return json.dumps({"message": 'dirlist saved successfully'})
