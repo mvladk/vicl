@@ -2,7 +2,7 @@ import json
 import os
 
 from commands.Command import Command
-from client import communication as c
+from client import communication as server
 
 """
 DirList implements Command
@@ -21,5 +21,5 @@ class DirList(Command):
 
         # defining a data dict for the parameters to be sent to the API
         data = {'path': self.path, 'DirList': json.dumps(dirlist)}
-        return c.request_server('dirlist', 'post', data=data)
+        return server.request_server('dirlist', 'post', data=data)
 

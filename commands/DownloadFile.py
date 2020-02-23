@@ -1,5 +1,5 @@
 from commands.Command import Command
-from client import communication as c
+from client import communication as server
 
 """
 DownloadFile implements Command
@@ -16,4 +16,4 @@ class DownloadFile(Command):
     def run(self):
         # defining a files dict for the parameters to be sent to the API
         files = {'file': open(self.path, 'rb')}
-        return c.request_server('uploader', 'post', files=files)
+        return server.request_server('uploader', 'post', files=files)

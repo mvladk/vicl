@@ -5,9 +5,7 @@ HOST = "http://127.0.0.1:5000/"
 
 """
     Request Service
-        # data = r.content
         # r.encoding = 'utf-8'  # Optional: requests infers this internally
-        # # data = r.text
 """
 
 
