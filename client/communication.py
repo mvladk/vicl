@@ -30,6 +30,25 @@ def upload_dirlist(path, dirlist):
         # # data = r.text
 """
 
+# todo: remove duplicate, make layer for communication
+# def request_server2(action, method="get", params=None, files=None):
+#     host = "http://127.0.0.1:5000/"
+#     url = host + action
+#
+#     # sending get request and saving the response as response object
+#     try:
+#         s = requests.Session()
+#         r = getattr(s, method)(url=url, params=params, files=files)
+#         # r = s.get(url=url, params=params)
+#         # r.raise_for_status()
+#     except requests.exceptions.ConnectionError:
+#         pass
+#     except requests.exceptions.HTTPError as err:
+#         print(err)
+#         sys.exit(1)
+#
+#     return [] if 200 != r.status_code else r.json()
+
 
 def request_server(action, params=None):
     host = "http://127.0.0.1:5000/"
