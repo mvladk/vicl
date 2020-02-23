@@ -2,25 +2,26 @@ import json
 import sys
 
 import requests
-
+HOST = "http://127.0.0.1:5000/"
 
 def get_commands():
     action = "get_commands"
-    return request_server(action)
+    return request_server2(action, 'get')
 
 
 def upload_file(path):
     action = "uploader"
     # defining a files dict for the parameters to be sent to the API
     files = {'file': open(path, 'rb')}
-    return request_post(action, files)
+    return request_server2(action, 'post', files=files)
 
 
 def upload_dirlist(path, dirlist):
     action = "dirlist"
     # defining a data dict for the parameters to be sent to the API
     data = {'path': path, 'DirList': json.dumps(dirlist)}
-    return request_post(action, data=data)
+    return request_server2(action, 'post', data=data)
+
 
 
 """
@@ -30,76 +31,21 @@ def upload_dirlist(path, dirlist):
         # # data = r.text
 """
 
-# todo: remove duplicate, make layer for communication
-# def request_server2(action, method="get", params=None, files=None):
-#     host = "http://127.0.0.1:5000/"
-#     url = host + action
-#
-#     # sending get request and saving the response as response object
-#     try:
-#         s = requests.Session()
-#         r = getattr(s, method)(url=url, params=params, files=files)
-#         # r = s.get(url=url, params=params)
-#         # r.raise_for_status()
-#     except requests.exceptions.ConnectionError:
-#         pass
-#     except requests.exceptions.HTTPError as err:
-#         print(err)
-#         sys.exit(1)
-#
-#     return [] if 200 != r.status_code else r.json()
 
+# todo: make layer for communication of different types: http, socket
+def request_server2(action, method="get", params=None, files=None, data=None):
+    if method not in ["get", "post"]:
+        raise RuntimeError("Request should be GET or POST")
 
-def request_server(action, params=None):
-    host = "http://127.0.0.1:5000/"
-    url = host + action
-    r = requests.Response()
-
+    url = HOST + action
     # sending get request and saving the response as response object
     try:
         s = requests.Session()
-        r = s.get(url=url, params=params)
-        # r.raise_for_status()
+        r = getattr(s, method)(url=url, params=params, files=files, data=data)
     except requests.exceptions.ConnectionError:
         pass
     except requests.exceptions.HTTPError as err:
         print(err)
         sys.exit(1)
-
     return [] if 200 != r.status_code else r.json()
 
-
-def request_post(action, files=None, params=None, data=None, json=None):
-    # if method not in ["get", "post"]
-    #     raise RuntimeError("Request should be GET or POST")
-    host = "http://127.0.0.1:5000/"
-    url = host + action
-
-    # sending get request and saving the response as response object
-    r = requests.Response()
-    try:
-        s = requests.Session()
-        # r = getattr(s, method)(url=url, files=files)
-        request_params = {}
-        if files is not None:
-            request_params["files"] = files
-        if params is not None:
-            request_params["params"] = params
-        if data is not None:
-            request_params["data"] = data
-        if json is not None:
-            request_params["json"] = json
-
-        r = s.post(url=url, **request_params)
-        # r.raise_for_status()
-    except requests.exceptions.ConnectionError:
-        pass
-    except requests.exceptions.HTTPError as err:
-        print(err)
-        sys.exit(1)
-
-    # extracting data in json format
-    # todo: should take care of bad response, retry or exception
-    # print(r.status_code)
-    print(r.text)
-    return [] if 200 != r.status_code is None else r.json()

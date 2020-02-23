@@ -1,9 +1,10 @@
-
 """
 Abstract base class for command, implements runnable interface
 initiates required parameters for child classes
 
 """
+
+
 class Command(object):
     def __init__(self, i_params):
         self.params = i_params
